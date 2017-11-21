@@ -1,5 +1,3 @@
-'use strict'
-
 const path = require('path')
 const assert = require('yeoman-assert')
 const test = require('yeoman-test')
