@@ -71,6 +71,9 @@
   "scripts": {
     "test": "eslint . && mocha"
   },
+  "engines": {
+    "node": ">= 7.6.0"
+  },
   "eslintConfig": {
     "extends": "trails",
     "env": {
