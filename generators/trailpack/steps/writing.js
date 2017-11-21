@@ -19,7 +19,14 @@ module.exports = {
 
     this.fs.write(this.destinationPath('index.js'), classUpdated)
 
-
-    return this.npmInstall(null, { save: true, progress: false, silent: true })
+    /*
+    this.npmInstall([ ], {
+      save: true,
+      silent: false,
+      progress: true,
+    }).then(() => {
+      //console.log('done')
+    })
+    */
   }
 }

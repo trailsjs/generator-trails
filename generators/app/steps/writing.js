@@ -55,11 +55,9 @@ module.exports = {
     this.npmInstall(npmTrailpacks, {
       save: true,
       silent: true,
-      loglevel: 'error'
-    }, (err) => {
-      if (err) {
-        throw err
-      }
+      loglevel: 'error',
+      progress: false,
+    }).then(() => {
       trailpackNames.forEach(item => {
         const ARCH = path.resolve(PROJECT_PATH, item, 'archetype', '**')
         this.fs.copy(ARCH, dest)

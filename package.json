@@ -47,7 +47,7 @@
     "url": "https://github.com/trailsjs/generator-trails.git"
   },
   "dependencies": {
-    "chalk": "^1.1",
+    "chalk": "^2.3",
     "detect-conflicts": "^0.1.1",
     "falafel": "^2.1.0",
     "path-exists": "^3.0.0",
@@ -55,13 +55,13 @@
     "trailpack": "^3",
     "trailpack-hapi": "^3.0.3",
     "trails": "^3",
-    "update-notifier": "^1.0.3",
-    "yeoman-generator": "^1.1",
-    "yo": "^1.8.5",
+    "update-notifier": "^2.3",
+    "yeoman-generator": "^2",
+    "yo": "^2",
     "yosay": "^2"
   },
   "devDependencies": {
-    "eslint": "^3",
+    "eslint": "^4",
     "eslint-config-trails": "^3",
     "mocha": "^4",
     "smokesignals": "^3",

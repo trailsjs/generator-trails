@@ -24,7 +24,6 @@ describe('trails:app', () => {
           'skip-update': true,
           'skip-install': false
         })
-        .toPromise()
     })
 
     it('Should properly create root files', () => {

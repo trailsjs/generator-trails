@@ -10,6 +10,7 @@ describe('trails:trailpack', () => {
           .run(path.join(__dirname, '..', '..', 'generators', 'trailpack'))
           .inTmpDir()
           .withOptions({
+            'skip-update': true,
             'skip-install': false
           })
           .withArguments(['trailpack-hapi'])
