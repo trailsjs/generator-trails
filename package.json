@@ -69,7 +69,7 @@
     "yeoman-test": "^1.6"
   },
   "scripts": {
-    "test": "eslint . && mocha"
+    "test": "eslint . && DEBUG=yeoman:generator mocha"
   },
   "engines": {
     "node": ">= 7.6.0"
