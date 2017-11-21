@@ -17,10 +17,17 @@ describe('trails:trailpack', () => {
           .toPromise()
       })
 
-      it('should properly create trailpack files', () => {
+      it('should properly create trailpack api/controllers files', () => {
         assert.file([
           'api/controllers/index.js'
         ])
+      })
+      it('should properly create trailpack archetype files', () => {
+        assert.file([
+          'api/controllers/DefaultController.js'
+        ])
+        assert.fileContent('config/web.js', /port:/)
+        assert.fileContent('config/web.js', /host:/)
       })
     })
   })

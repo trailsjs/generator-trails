@@ -19,7 +19,7 @@ describe('trails:app', () => {
           authorName: 'trailsjs',
           authorEmail: 'hello@trailsjs.io',
           license: 'MIT'
-        }) // Mock the prompt answers
+        })
         .withOptions({
           'skip-update': true,
           'skip-install': false
@@ -59,6 +59,11 @@ describe('trails:app', () => {
         }).catch(done)
       }
       trailsApp.start().then(stop).catch(stop)
+    })
+    it('should properly include selected trailpacks', () => {
+      assert.fileContent('config/main.js', /require\('trailpack-router'\)/)
+      assert.fileContent('config/main.js', /require\('trailpack-hapi'\)/)
+      assert.fileContent('config/main.js', /require\('trailpack-waterline'\)/)
     })
   })
 
