@@ -7,14 +7,13 @@ module.exports = {
   },
 
   writeFiles () {
-    //console.log('model options', this.options)
     this.fs.copyTpl(
       this.templatePath('Model.js'),
       this.destinationPath(path.join('api/models', this.options.modelFileName)),
       this.options)
     this.fs.copyTpl(
       this.templatePath('Resolver.js'),
-      this.destinationPath(path.join('api/resolvers', this.options.modelFileName)),
+      this.destinationPath(path.join('api/resolvers', this.options.resolverFileName)),
       this.options)
 
     this.fs.copyTpl(
@@ -26,7 +25,12 @@ module.exports = {
   modifyIndexFiles () {
     Util.updateIndexFile({
       indexFile: 'api/models/index.js',
-      requiredFiles: [ this.options.modelFileName ],
+      requiredFiles: [ this.options.modelName ],
+      gen: this
+    })
+    Util.updateIndexFile({
+      indexFile: 'api/resolvers/index.js',
+      requiredFiles: [ this.options.resolverName ],
       gen: this
     })
   }

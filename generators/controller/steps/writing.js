@@ -22,7 +22,7 @@ module.exports = {
   modifyIndexFiles () {
     Util.updateIndexFile({
       indexFile: 'api/controllers/index.js',
-      requiredFiles: [ this.options.controllerFileName ],
+      requiredFiles: [ this.options.controllerClass ],
       gen: this
     })
   }

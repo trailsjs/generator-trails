@@ -16,6 +16,9 @@ describe('trails:controller', () => {
         'api/controllers/TestController.js'
       ])
     })
+    it('should add require to api/controllers index file', () => {
+      assert.fileContent('api/controllers/index.js', /require\('\.\/TestController'\)$/)
+    })
     it('should correctly set Controller class name', () => {
       assert.fileContent('api/controllers/TestController.js', /class TestController/)
     })

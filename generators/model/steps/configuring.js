@@ -2,8 +2,11 @@ const Util = require( '../../../lib/util')
 
 module.exports = function () {
   this.options.modelName = Util.capitalizeFirstLetter(this.options['modelName'])
-  this.options.modelRoot = this.options.modelName.replace(/^(\w+)/, '$1')
-  this.options.modelFileName = `${this.options.modelRoot}.js`
-  this.options.modelTestFileName = `${this.options.modelRoot}.test.js`
+  this.options.modelFileName = `${this.options.modelName}.js`
+  this.options.modelTestFileName = `${this.options.modelName}.test.js`
   this.options.modelDesc = this.answers.desc.trim()
+
+  this.options.resolverRoot = Util.capitalizeFirstLetter(this.options['modelName'])
+  this.options.resolverName = `${this.options.resolverRoot}Resolver`
+  this.options.resolverFileName = `${this.options.resolverName}.js`
 }

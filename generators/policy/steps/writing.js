@@ -22,7 +22,7 @@ module.exports = {
   modifyIndexFiles () {
     Util.updateIndexFile({
       indexFile: 'api/policies/index.js',
-      requiredFiles: [ this.options.policyFileName ],
+      requiredFiles: [ this.options.policyClass ],
       gen: this
     })
   }

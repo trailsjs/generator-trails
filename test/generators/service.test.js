@@ -17,7 +17,9 @@ describe('trails:service', () => {
       assert.file([
         'api/services/TestService.js'
       ])
-
+    })
+    it('should add require to api/services index file', () => {
+      assert.fileContent('api/services/index.js', /require\('\.\/TestService'\)$/)
     })
 
     it('Should properly create test files', () => {

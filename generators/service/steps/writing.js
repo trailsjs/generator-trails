@@ -21,7 +21,7 @@ module.exports = {
   modifyIndexFiles () {
     return Util.updateIndexFile({
       indexFile: 'api/services/index.js',
-      requiredFiles: [ this.options.serviceFileName ],
+      requiredFiles: [ this.options.serviceClass ],
       gen: this
     })
   }

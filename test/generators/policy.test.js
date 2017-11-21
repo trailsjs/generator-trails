@@ -18,7 +18,9 @@ describe('trails:policy', () => {
         'api/policies/TestPolicy.js',
         'api/policies/index.js'
       ])
-
+    })
+    it('should add require to api/policies index file', () => {
+      assert.fileContent('api/policies/index.js', /require\('\.\/TestPolicy'\)$/)
     })
 
     it('Should properly create test files', () => {
