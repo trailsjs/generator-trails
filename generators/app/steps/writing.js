@@ -2,43 +2,35 @@ const path = require('path')
 const trailsArchetype = path.dirname(require.resolve('trails/archetype'))
 const trailsPackage = require(path.resolve(trailsArchetype, 'package.json'))
 const trailsSeries = trailsPackage.dependencies.trails
+const Util = require('../../../lib/util')
 
 module.exports = {
 
   trailpackInstall () {
-    let trailpacks = this.options.trailpacks
-    const server = this.answers ? this.answers['web-engine'] : null
-    const orm = this.answers ? this.answers['orm-engine'] : null
-    const dest = this.destinationPath()
-    const PROJECT_PATH = this.destinationPath('node_modules/')
+    const server = this.answers['web-engine']
+    const orm = this.answers['orm-engine']
 
-    if (!trailpacks) {
-      trailpacks = server == 'other' ? this.answers['web-engine-other'] : 'trailpack-' + server
-      if (orm && orm != 'none') {
-        trailpacks += ',' + (orm == 'other' ? this.answers['orm-engine-other'] : 'trailpack-' + orm)
-        if (this.answers['footprints']) {
-          trailpacks += ',' + 'trailpack-footprints'
-        }
-      }
+    if (server === 'other' && this.answers['web-engine-other']) {
+      this.options.packArray.push('trailpack-router')
+      this.options.packArray.push(this.answers['web-engine-other'])
+    }
+    else if (server) {
+      this.options.packArray.push('trailpack-router')
+      this.options.packArray.push(`trailpack-${server}`)
     }
 
-    trailpacks = (trailpacks || '').replace(/,/g, ' ')
+    if (orm === 'other' && this.answers['orm-engine-other']) {
+      this.options.packArray.push(this.answers['orm-engine-other'])
+    }
+    else if (orm) {
+      this.options.packArray.push(`trailpack-${orm}`)
+    }
 
-    const trailpackNames = trailpacks.split(' ')
+    if (this.answers['footprints']) {
+      this.options.packArray.push('trailpack-footprints')
+    }
 
-    let trailpackRequires = ''
-    trailpackNames.forEach(item => {
-      trailpackRequires += item + '\'),\n    require(\''
-    })
-
-    trailpackRequires = trailpackRequires.substring(trailpackRequires.length - 17, trailpackRequires)
-    const mainConfigFile = path.resolve(dest, 'config', 'main.js')
-
-    this.fs.delete(mainConfigFile)//Delete main.js to generate it from template
-
-    this.fs.copyTpl(path.resolve(trailsArchetype, 'config', 'main.js'), mainConfigFile, {trailpacks: trailpackRequires})
-
-    const npmTrailpacks = trailpackNames.map(name => `${name}@${trailsSeries}`)
+    const npmTrailpacks = this.options.packArray.map(name => `${name}@${trailsSeries}`)
 
     if (server == 'express') {
       if (this.answers['express-version'] == '4') {
@@ -57,23 +49,29 @@ module.exports = {
       silent: true,
       loglevel: 'error',
       progress: false,
-    }).then(() => {
+    })
+        /*
+        .then(() => {
       trailpackNames.forEach(item => {
         const ARCH = path.resolve(PROJECT_PATH, item, 'archetype', '**')
         this.fs.copy(ARCH, dest)
       })
     })
+    */
   },
 
   copyArchetypeFiles() {
     this.fs.copy(path.resolve(trailsArchetype, '**'), this.destinationPath())
     this.fs.copy(path.resolve(trailsArchetype, '**/.*'), this.destinationPath())
+    this.fs.copyTpl(
+      path.resolve(trailsArchetype, 'config/main.js'),
+      this.destinationPath('config/main.js'),
+      { trailpacks: Util.getTrailpackRequireArray(this.options.packArray) }
+    )
   },
 
   pkg()  {
     // node:app generator will merge into this
-    if (!this.options['skip-install']) {
-      this.fs.writeJSON(this.destinationPath('package.json'), trailsPackage)
-    }
+    this.fs.writeJSON(this.destinationPath('package.json'), trailsPackage)
   }
 }

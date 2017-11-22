@@ -64,6 +64,7 @@ describe('trails:app', () => {
       assert.fileContent('config/main.js', /require\('trailpack-router'\)/)
       assert.fileContent('config/main.js', /require\('trailpack-hapi'\)/)
       assert.fileContent('config/main.js', /require\('trailpack-waterline'\)/)
+      assert.fileContent('config/main.js', /require\('trailpack-footprints'\)/)
     })
   })
 
