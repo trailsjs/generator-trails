@@ -50,24 +50,17 @@ module.exports = {
       loglevel: 'error',
       progress: false,
     })
-        /*
-        .then(() => {
-      trailpackNames.forEach(item => {
-        const ARCH = path.resolve(PROJECT_PATH, item, 'archetype', '**')
-        this.fs.copy(ARCH, dest)
-      })
-    })
-    */
   },
 
   copyArchetypeFiles() {
     this.fs.copy(path.resolve(trailsArchetype, '**'), this.destinationPath())
     this.fs.copy(path.resolve(trailsArchetype, '**/.*'), this.destinationPath())
-    this.fs.copyTpl(
-      path.resolve(trailsArchetype, 'config/main.js'),
-      this.destinationPath('config/main.js'),
-      { trailpacks: Util.getTrailpackRequireArray(this.options.packArray) }
-    )
+
+    const newMainConfig = Util.updateMainConfigFile({
+      configFile: this.fs.read('config/main.js'),
+      trailpacks: this.options.packArray
+    })
+    this.fs.write(this.destinationPath('config/main.js'), newMainConfig)
   },
 
   pkg()  {
