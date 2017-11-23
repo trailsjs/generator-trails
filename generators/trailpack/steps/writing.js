@@ -1,37 +1,32 @@
-'use strict'
-
-/**
- * Step 5
- * Where you write the generator specific files (routes, controllers, etc)
- */
-
 const path = require('path')
-const Util = require('@trails/generator-util').util
+const Util = require('../../../lib/util')
 
-module.exports = function () {
+module.exports = {
+  createNew () {
+    if (!this.options['new']) return
 
-  const dest = this.destinationPath()
-  const PROJECT_PATH = this.destinationPath('node_modules/')
-  const indexPath = path.resolve(dest, 'config', 'index.js')
+    const trailpackArchetype = path.dirname(require.resolve('trailpack/archetype'))
+    this.fs.copyTpl(path.resolve(trailpackArchetype, '**'), this.destinationPath(), this.options)
+    this.fs.copy(path.resolve(trailpackArchetype, '**/.*'), this.destinationPath())
 
-  const trailpackNames = this.options.trailpacks.split(',')
-  const npmTrailpacks = trailpackNames.map(name => name.indexOf('@') == -1 ? `${name}@latest` : name)
+    const archetypePkg = this.fs.readJSON(this.destinationPath('package.json'))
+    const newPkg = Object.assign({ name: this.options.packName }, archetypePkg)
 
-  this.npmInstall(npmTrailpacks, {
-    save: true,
-    silent: true,
-    loglevel: 'silent'
-  }, (err) => {
-    if (err) {
-      throw err
-    }
-    trailpackNames.forEach(item => {
-      const ARCH = path.resolve(PROJECT_PATH + item, 'archetype', '**')
-      this.fs.copy(ARCH, dest)
+    this.fs.writeJSON(this.destinationPath('package.json'), newPkg)
+
+    const classArchetype = this.fs.read(path.resolve(trailpackArchetype, 'index.js'))
+    const classUpdated = Util.getUpdatedTrailpackClass(classArchetype, this.options.packName)
+
+    this.fs.write(this.destinationPath('index.js'), classUpdated)
+
+    /*
+    this.npmInstall([ ], {
+      save: true,
+      silent: false,
+      progress: true,
+    }).then(() => {
+      //console.log('done')
     })
-    //FIXME is there a better way for doing this ???
-    this.fs.commit(function () {
-      Util.updatedIndexesFolder(indexPath, path.resolve(dest, 'config'), ['locales'])
-    }.bind(this))
-  })
+    */
+  }
 }
