@@ -15,6 +15,7 @@ describe('trails:app', () => {
         .withPrompts({
           'web-engine': 'hapi',
           'orm-engine': 'waterline',
+
           footprints: true,
           authorName: 'trailsjs',
           authorEmail: 'hello@trailsjs.io',
