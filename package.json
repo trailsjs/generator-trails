@@ -48,23 +48,19 @@
   },
   "dependencies": {
     "chalk": "^2.3",
-    "detect-conflicts": "^0.1.1",
+    "detect-conflict": "^1.0.1",
     "falafel": "^2.1.0",
     "path-exists": "^3.0.0",
     "print-message": "^2.1.0",
     "trailpack": "^3",
-    "trailpack-hapi": "^3.0.3",
     "trails": "^3",
     "update-notifier": "^2.3",
-    "yeoman-generator": "^2",
-    "yo": "^2",
-    "yosay": "^2"
+    "yeoman-generator": "^2"
   },
   "devDependencies": {
     "eslint": "^4",
     "eslint-config-trails": "^3",
     "mocha": "^4",
-    "smokesignals": "^3",
     "yeoman-assert": "^3",
     "yeoman-test": "^1.6"
   },
