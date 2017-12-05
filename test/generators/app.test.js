@@ -15,6 +15,7 @@ describe('trails:app', () => {
         .withPrompts({
           'web-engine': 'hapi',
           'orm-engine': 'waterline',
+          logger: 'winston',
 
           footprints: true,
           authorName: 'trailsjs',
@@ -23,7 +24,8 @@ describe('trails:app', () => {
         })
         .withOptions({
           'skip-update': true,
-          'skip-install': false
+          'skip-install': false,
+          force: true
         })
     })
 
@@ -66,6 +68,7 @@ describe('trails:app', () => {
       assert.fileContent('config/main.js', /require\('trailpack-hapi'\)/)
       assert.fileContent('config/main.js', /require\('trailpack-waterline'\)/)
       assert.fileContent('config/main.js', /require\('trailpack-footprints'\)/)
+      assert.fileContent('config/main.js', /require\('trailpack-winston'\)/)
     })
   })
 
@@ -87,7 +90,8 @@ describe('trails:app', () => {
         }) // Mock the prompt answers
         .withOptions({
           'skip-update': true,
-          'skip-install': false
+          'skip-install': false,
+          force: true
         })
         .toPromise()
     })

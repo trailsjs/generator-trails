@@ -3,3 +3,6 @@ coverage
 /.idea/
 /.tmp
 *.sw*
+
+package-lock.json
+yarn.lock

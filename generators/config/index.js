@@ -2,7 +2,7 @@ const Generator = require('yeoman-generator')
 const generatorArguments = require('./arguments')
 const generatorSteps = require('./steps')
 
-module.exports = class ModelGenerator extends Generator {
+module.exports = class ConfigGenerator extends Generator {
   constructor(args, options) {
     super(args, options)
 

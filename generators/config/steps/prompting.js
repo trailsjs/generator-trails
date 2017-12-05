@@ -3,8 +3,8 @@ module.exports = function () {
     {
       type: 'input',
       name: 'desc',
-      message: 'Controller Description',
-      default: 'TODO document this Controller'
+      message: 'Config Description',
+      default: 'TODO document this Configuration File'
     }
   ]).then(answers => {
     this.answers = Object.assign(this.answers || {}, answers)

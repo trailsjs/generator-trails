@@ -4,9 +4,8 @@ module.exports = function () {
   const server = this.answers['web-engine']
   const orm = this.answers['orm-engine']
 
-  if (this.options.logger && this.options.logger !== 'none') {
-    const loggerTrailpack = `trailpack-${this.options.logger}`
-    this.options.packArray.push(loggerTrailpack)
+  if (this.answers.logger && this.answers.logger !== 'none') {
+    this.options.packArray.push(`trailpack-${this.answers.logger}`)
   }
 
   if (server === 'other' && this.answers['web-engine-other']) {
