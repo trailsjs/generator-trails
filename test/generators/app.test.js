@@ -24,7 +24,8 @@ describe('trails:app', () => {
         })
         .withOptions({
           'skip-update': true,
-          'skip-install': false
+          'skip-install': false,
+          force: true
         })
     })
 
@@ -89,7 +90,8 @@ describe('trails:app', () => {
         }) // Mock the prompt answers
         .withOptions({
           'skip-update': true,
-          'skip-install': false
+          'skip-install': false,
+          force: true
         })
         .toPromise()
     })
