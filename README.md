@@ -25,6 +25,7 @@ Options:
         --skip-cache    # Do not remember prompt answers             Default: false
         --skip-install  # Do not automatically install dependencies  Default: false
         --skip-update   # Do not check for generator's updates       Default: false
+        --force         # Force. Do stuff even if you shouldn't.     Default: false
 
 Generators:
 
@@ -42,6 +43,9 @@ Generators:
 
   Create New Trailpack
     yo trails:trailpack --new
+
+  Create new Configuration File
+    yo trails:config <config-name>
     
   Install Trailpacks into a Trails Application
     yo trails:trailpack --install <trailpacks-name> (like yo trails:trailpack trailpack-repl,trailpack-webpack,...)
