@@ -4,9 +4,6 @@
   "description": "Trails Generator",
   "homepage": "https://github.com/trailsjs/generator-trails",
   "author": "Trails.js Team <hello@trailsjs.io>",
-  "files": [
-    "generators"
-  ],
   "main": "generators/app/index.js",
   "keywords": [
     "yeoman-generator",
