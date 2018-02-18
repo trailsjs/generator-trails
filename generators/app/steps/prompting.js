@@ -7,7 +7,7 @@ module.exports = function () {
       choices: [
         'hapi',
         'express',
-        'koa'
+        'koa',
         'other'
       ],
       defaults: 'hapi'
